@@ -56,7 +56,7 @@ void moveZombies(vector<vector<Cell>>& grid) {
 
                 uniform_int_distribution<int> dist(0, 3);
 
-                auto [nr, nc] = nb[dist(rng)]; //
+                auto [nr, nc] = nb[dist(rng)]; 
 
                 next[i][j].zombies--;
                 next[nr][nc].zombies++;
@@ -89,7 +89,7 @@ void moveCitizens(vector<vector<Cell>>& grid) {
 
                 for (auto [nr, nc] : neighbors(i, j)) if (grid[nr][nc].zombies > 0) zombieNearby = true;
 
-                if (zombieNearby) { //
+                if (zombieNearby) { 
 
                     auto nb = neighbors(i, j); 
 
@@ -282,7 +282,7 @@ int main() {
     int citizens = floor(0.24 * total);
     int zombies = floor(0.30 * total);
 
-    vector<pair<int, int>> cells; //
+    vector<pair<int, int>> cells; 
 
     for (int i = 0; i < n; i++)
         for (int j = 0; j < n; j++) cells.push_back({ i,j }); 
@@ -352,4 +352,5 @@ int main() {
     SDL_Quit();
 
 }
+
 

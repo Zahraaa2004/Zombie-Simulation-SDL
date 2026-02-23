@@ -26,7 +26,7 @@ int windowSize = 800;
 
 int powerGlobal;
 
-mt19937 rng(random_device{}()); //
+mt19937 rng(random_device{}()); 
 
 int mod(int x) {
 
@@ -69,7 +69,7 @@ void moveZombies(vector<vector<Cell>>& grid) {
 
     }
 
-    grid = next; //
+    grid = next; 
 
 }
 
@@ -184,11 +184,11 @@ void moveHunters(vector<vector<Cell>>& grid) {
 
                 next[i][j].hunters--;
 
-                if (grid[nr2][nc2].zombies > powerGlobal) { //
+                if (grid[nr2][nc2].zombies > powerGlobal) { 
 
-                    int killed = min(5, next[nr2][nc2].zombies); //
+                    int killed = min(5, next[nr2][nc2].zombies); 
 
-                    next[nr2][nc2].zombies -= killed; //
+                    next[nr2][nc2].zombies -= killed; 
                 }
 
                 else next[nr2][nc2].hunters++;
@@ -205,9 +205,9 @@ void moveHunters(vector<vector<Cell>>& grid) {
 
 void render(SDL_Renderer* renderer, vector<vector<Cell>>& grid) {
 
-    int cellSize = windowSize / n; //
+    int cellSize = windowSize / n; 
 
-    SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND); //
+    SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND); 
 
     for (int i = 0; i < n; i++) {
 
@@ -215,7 +215,7 @@ void render(SDL_Renderer* renderer, vector<vector<Cell>>& grid) {
 
             float dirtRatio = grid[i][j].dirt / 10.0f;
 
-            Uint8 gray = (Uint8)(220 - dirtRatio * 150); //
+            Uint8 gray = (Uint8)(220 - dirtRatio * 150); 
 
             SDL_SetRenderDrawColor(renderer, gray, gray, gray, 255);
 
@@ -225,7 +225,7 @@ void render(SDL_Renderer* renderer, vector<vector<Cell>>& grid) {
 
             SDL_SetRenderDrawColor(renderer, 40, 40, 40, 255);
 
-            SDL_RenderRect(renderer, &rect); //
+            SDL_RenderRect(renderer, &rect); 
 
             int totalAgents = grid[i][j].zombies + grid[i][j].citizens + grid[i][j].hunters;
 
@@ -242,7 +242,7 @@ void render(SDL_Renderer* renderer, vector<vector<Cell>>& grid) {
                     int row = index / 5;
                     int col = index % 5;
 
-                    SDL_FRect sq = { j * cellSize + col * subSize + 1, i * cellSize + row * subSize + 1, subSize - 2, subSize - 2 }; //
+                    SDL_FRect sq = { j * cellSize + col * subSize + 1, i * cellSize + row * subSize + 1, subSize - 2, subSize - 2 }; 
 
                     SDL_SetRenderDrawColor(renderer, r, g, b, 255);
                     SDL_RenderFillRect(renderer, &sq);
@@ -285,13 +285,13 @@ int main() {
     vector<pair<int, int>> cells; //
 
     for (int i = 0; i < n; i++)
-        for (int j = 0; j < n; j++) cells.push_back({ i,j }); //
+        for (int j = 0; j < n; j++) cells.push_back({ i,j }); 
 
-    shuffle(cells.begin(), cells.end(), rng); //
+    shuffle(cells.begin(), cells.end(), rng); 
 
-    int idx = 0; //
+    int idx = 0; 
 
-    for (int i = 0; i < hunters; i++) grid[cells[idx].first][cells[idx++].second].hunters = 1; //
+    for (int i = 0; i < hunters; i++) grid[cells[idx].first][cells[idx++].second].hunters = 1; 
     for (int i = 0; i < citizens; i++) grid[cells[idx].first][cells[idx++].second].citizens = 1;
     for (int i = 0; i < zombies; i++) grid[cells[idx].first][cells[idx++].second].zombies = 1;
 
@@ -303,7 +303,7 @@ int main() {
 
     while (running) {
 
-        while (SDL_PollEvent(&event)) if (event.type == SDL_EVENT_QUIT) running = false; //
+        while (SDL_PollEvent(&event)) if (event.type == SDL_EVENT_QUIT) running = false; 
 
         moveZombies(grid);
         moveCitizens(grid);
@@ -326,15 +326,15 @@ int main() {
             cout << "Game Over in " << days << " days" << endl;
             cout << (totalZ == 0 ? "Citizens Win\n" : "Zombies Win\n");
 
-            SDL_Delay(3000); //
+            SDL_Delay(3000); 
 
             break;
 
         }
 
-        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255); //
+        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255); 
 
-        SDL_RenderClear(renderer); //
+        SDL_RenderClear(renderer); 
 
         render(renderer, grid);
 
@@ -352,3 +352,4 @@ int main() {
     SDL_Quit();
 
 }
+
